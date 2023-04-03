@@ -4,7 +4,7 @@ import { IUpdateUserRepository } from "../../controllers/update-user/protocols";
 import { MongoClient } from "../../database/mongo";
 import { User } from "../../models/user";
 
-export class MongUpdateUserRepository implements IUpdateUserRepository {
+export class MongoUpdateUserRepository implements IUpdateUserRepository {
   async updateUser(id: string, params: any): Promise<User> {
     await MongoClient.db.collection("users").updateOne(
       { _id: new ObjectId(id) },
@@ -23,8 +23,8 @@ export class MongUpdateUserRepository implements IUpdateUserRepository {
       throw new Error("User not updated");
     }
 
-    const { _id, ...rest } = user
+    const { _id, ...rest } = user;
 
-    return { id: _id.toHexString(), ...rest};
+    return { id: _id.toHexString(), ...rest };
   }
 }
